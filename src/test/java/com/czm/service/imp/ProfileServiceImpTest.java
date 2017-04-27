@@ -22,10 +22,22 @@ public class ProfileServiceImpTest {
     @Autowired
     private ProfileService profileService;
 
-    @Test
-    public void profileCompany() throws Exception {
+//    @Test
+//    public void profileCompany() throws Exception {
+//
+//        this.profileService.profileCompany(new FileInputStream(new File("F://Profile/TravelAgent.xls")));
+//    }
 
-        this.profileService.profileCompany(new FileInputStream(new File("F://Companyc.xls")));
+
+    @Test
+    public void AnalyticalProfileCompany() throws Exception {
+
+        this.profileService.AnalyticalProfileCompany();
     }
 
+
+//    @Test
+//    public void profileCompanyDelete() {
+//        this.profileService.deleteprofileCompany();
+//    }
 }

@@ -39,7 +39,6 @@ public class CacheAspect {
         //在内存缓存中判断是否存在
         CacheEntity cache = CacheHandler.getCache(key);
         if (cache != null) return cache.getContent();
-
         //使用redis 的hash进行存取，易于管理
         result = redisTemplate.opsForValue().get(key);
 

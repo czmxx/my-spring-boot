@@ -31,7 +31,6 @@ public class ProfileCompany {
      */
     private String country;
 
-    @Column(name = "State")
     private String state;
 
     /**
@@ -42,12 +41,29 @@ public class ProfileCompany {
 
     private String vip;
 
+    private String stays;
+
     /**
      * 联系方式
      */
     private String communications;
 
     private String number;
+
+    @Column(name = "other_communications")
+    private String otherCommunications;
+
+    @Column(name = "email_address")
+    private String emailAddress;
+
+    @Column(name = "fax_number")
+    private String faxNumber;
+
+    @Column(name = "business_phone")
+    private String businessPhone;
+
+    @Column(name = "mobile_phone")
+    private String mobilePhone;
 
     /**
      * 获取客史Id
@@ -140,7 +156,7 @@ public class ProfileCompany {
     }
 
     /**
-     * @return State
+     * @return state
      */
     public String getState() {
         return state;
@@ -186,6 +202,20 @@ public class ProfileCompany {
     }
 
     /**
+     * @return stays
+     */
+    public String getStays() {
+        return stays;
+    }
+
+    /**
+     * @param stays
+     */
+    public void setStays(String stays) {
+        this.stays = stays;
+    }
+
+    /**
      * 获取联系方式
      *
      * @return communications - 联系方式
@@ -215,5 +245,75 @@ public class ProfileCompany {
      */
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    /**
+     * @return other_communications
+     */
+    public String getOtherCommunications() {
+        return otherCommunications;
+    }
+
+    /**
+     * @param otherCommunications
+     */
+    public void setOtherCommunications(String otherCommunications) {
+        this.otherCommunications = otherCommunications;
+    }
+
+    /**
+     * @return email_address
+     */
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    /**
+     * @param emailAddress
+     */
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    /**
+     * @return fax_number
+     */
+    public String getFaxNumber() {
+        return faxNumber;
+    }
+
+    /**
+     * @param faxNumber
+     */
+    public void setFaxNumber(String faxNumber) {
+        this.faxNumber = faxNumber;
+    }
+
+    /**
+     * @return business_phone
+     */
+    public String getBusinessPhone() {
+        return businessPhone;
+    }
+
+    /**
+     * @param businessPhone
+     */
+    public void setBusinessPhone(String businessPhone) {
+        this.businessPhone = businessPhone;
+    }
+
+    /**
+     * @return mobile_phone
+     */
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    /**
+     * @param mobilePhone
+     */
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
     }
 }

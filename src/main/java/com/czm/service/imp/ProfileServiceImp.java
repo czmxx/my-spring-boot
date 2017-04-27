@@ -1,10 +1,11 @@
 package com.czm.service.imp;
 
 import com.czm.core.util.TransactionalServer;
+import com.czm.entity.Logs;
 import com.czm.entity.ProfileCompany;
+import com.czm.mapper.LogsMapper;
 import com.czm.mapper.ProfileCompanyMapper;
 import com.czm.service.ProfileService;
-import com.github.pagehelper.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -13,21 +14,22 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by chen zhan mei on 2017/4/25.
  */
-//@TransactionalServer
-@Service
+@TransactionalServer
 public class ProfileServiceImp implements ProfileService {
+
     @Autowired
     private ProfileCompanyMapper profileCompanyMapper;
-
+    @Autowired
+    private LogsMapper logsMapper;
 
     @Override
     public void profileCompany(InputStream inputStream) {
@@ -98,6 +100,8 @@ public class ProfileServiceImp implements ProfileService {
                         }
                     }
                     if (!isBegin) {
+                        if (getCellValue(row.getCell(name)).equals("Name"))
+                            continue;
                         ProfileCompany company = new ProfileCompany();
                         company.setName(getCellValue(row.getCell(name)));
                         company.setCity(getCellValue(row.getCell(city)));
@@ -105,11 +109,10 @@ public class ProfileServiceImp implements ProfileService {
                         company.setCountry(getCellValue(row.getCell(country)));
                         company.setState(getCellValue(row.getCell(state)));
                         company.setPostalCode(getCellValue(row.getCell(postalCode)));
-                        company.setVip(getCellValue(row.getCell(vip)));
-                        company.setStays(getCellValue(row.getCell(stays)));
-                        company.setCommunications(getCellValue(row.getCell(communications)));
-                        company.setNumber(getCellValue(row.getCell(communications + 1)));
-                        company.setNumber2(getCellValue(row.getCell(communications + 2)));
+                        //VIP获取 数据不对
+                        company.setStays(getCellValue(row.getCell(vip)));
+                        company.setCommunications(getCellValue(row.getCell(stays)));
+                        company.setNumber(getCellValue(row.getCell(communications)));
                         profileCompanyMapper.insert(company);
                     }
                 }
@@ -119,27 +122,58 @@ public class ProfileServiceImp implements ProfileService {
         }
     }
 
-
     @Override
-    public void deleteprofileCompany() {
-        List<ProfileCompany> profileCompanies = this.profileCompanyMapper.selectAll();
-        profileCompanies.forEach(a -> {
-            if (StringUtil.isEmpty(a.getName()) || (StringUtils.isEmpty(a.getNumber()) && StringUtils.isEmpty(a.getNumber2()))) {
-                this.profileCompanyMapper.delete(a);
+    public void AnalyticalProfileCompany() {
+
+        List<ProfileCompany> profileCompanies = profileCompanyMapper.selectAll();
+
+        for (int i = 0; i < profileCompanies.size(); i++) {
+            ProfileCompany company = profileCompanies.get(i);
+            //只有名字不为空的才新增数据解析
+            if (company != null && StringUtils.isNoneEmpty(company.getName()) && StringUtils.isNoneEmpty(company.getCity()) && StringUtils.isNoneEmpty(company.getStreet())) {
+                for (int j = 1; j <= 2; j++) {
+                    ProfileCompany company1 = profileCompanies.get(j + i);
+                    if (company1 != null) {
+                        //名字不为空,城市为空,街道为空 表示上一个名字分割的 并且是相邻的一个数据
+                        if (j == 1 && StringUtils.isNoneEmpty(company1.getName()) && StringUtils.isEmpty(company1.getCity())) {
+                            company.setName(company.getName() + " " + company1.getName());
+                            //名字为空,城市为空 ,街道为空 表示 上一个数据遗留的通信方式
+                        } else if (StringUtils.isEmpty(company1.getName()) && StringUtils.isEmpty(company1.getCity())) {
+                            getCommunications(company1.getPostalCode(), company1.getNumber(), company);
+                        } else if (StringUtils.isNoneEmpty(company1.getName()) && StringUtils.isNoneEmpty(company1.getCity())) {
+                            break;
+                        }
+                        this.profileCompanyMapper.updateByPrimaryKey(company);
+                        Logs logs = new Logs();
+                        logs.setChangeInfo(company.toString());
+                        logs.setChangeId(company.getId());
+                        logs.setModifyTime(new Date());
+                        logsMapper.insert(logs);
+                    }
+                }
             }
-        });
+            if (company != null && StringUtils.isNoneEmpty(company.getCommunications()) && StringUtils.isNoneEmpty(company.getName())) {
+                getCommunications(company.getCommunications(), company.getNumber(), company);
+                company.setCommunications(null);
+                company.setNumber(null);
+                this.profileCompanyMapper.updateByPrimaryKey(company);
+            }
+        }
+
     }
 
-    @Override
-    public void deleteProfileCompanyNotMobile() {
-
-        List<ProfileCompany> profileCompanies = this.profileCompanyMapper.selectAll();
-
-        profileCompanies.forEach(a -> {
-
-
-        });
-
+    private void getCommunications(String communication, String number, ProfileCompany profileCompany) {
+        if (communication.contains("Email Address")) {
+            profileCompany.setEmailAddress(number);
+        } else if (communication.contains("Fax Number")) {
+            profileCompany.setFaxNumber(number);
+        } else if (communication.contains("Business Phone")) {
+            profileCompany.setBusinessPhone(number);
+        } else if (communication.contains("Mobile Phone")) {
+            profileCompany.setMobilePhone(number);
+        } else {
+            profileCompany.setOtherCommunications(number);
+        }
     }
 
     private String getCellValue(HSSFCell cell) {

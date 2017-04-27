@@ -9,4 +9,7 @@ import java.io.InputStream;
 public interface ProfileService {
 
     void profileCompany(InputStream inputStream) throws IOException;
+
+
+    void AnalyticalProfileCompany();
 }
