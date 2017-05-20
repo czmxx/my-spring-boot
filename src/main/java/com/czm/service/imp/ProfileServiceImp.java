@@ -1,9 +1,7 @@
 package com.czm.service.imp;
 
 import com.czm.core.util.TransactionalServer;
-import com.czm.entity.Logs;
 import com.czm.entity.ProfileCompany;
-import com.czm.mapper.LogsMapper;
 import com.czm.mapper.ProfileCompanyMapper;
 import com.czm.service.ProfileService;
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,8 +25,8 @@ public class ProfileServiceImp implements ProfileService {
 
     @Autowired
     private ProfileCompanyMapper profileCompanyMapper;
-    @Autowired
-    private LogsMapper logsMapper;
+//    @Autowired
+//    private LogsMapper logsMapper;
 
     @Override
     public void profileCompany(InputStream inputStream) {
@@ -144,11 +141,11 @@ public class ProfileServiceImp implements ProfileService {
                             break;
                         }
                         this.profileCompanyMapper.updateByPrimaryKey(company);
-                        Logs logs = new Logs();
-                        logs.setChangeInfo(company.toString());
-                        logs.setChangeId(company.getId());
-                        logs.setModifyTime(new Date());
-                        logsMapper.insert(logs);
+//                        Logs logs = new Logs();
+//                        logs.setChangeInfo(company.toString());
+//                        logs.setChangeId(company.getId());
+//                        logs.setModifyTime(new Date());
+//                        logsMapper.insert(logs);
                     }
                 }
             }

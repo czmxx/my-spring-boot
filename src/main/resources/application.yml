@@ -1,20 +1,20 @@
 server:
-  port: 8881
+#  port: 8881
   context-path: /
 
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3306/test
+    url: jdbc:mysql://120.25.106.62:3306/czm
     username: root
-    password: root
+    password: 123456
     minIdle: 1
     maxActive: 2
     initialSize: 1
     timeBetweenEvictionRunsMillis: 3000
     minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 'ZTM' FROM DUAL
+#    validationQuery: SELECT 'ZTM' FROM DUAL
     testWhileIdle: true
     testOnBorrow: false
     testOnReturn: false
@@ -28,9 +28,9 @@ spring:
 #    redis 配置文件
   redis:
     database: 1
-    host: 127.0.0.1
+    host: 120.25.106.62
     port: 6379
-    password:
+    password: 123456
     timeout: 0
     pool:
       max-active: 8
