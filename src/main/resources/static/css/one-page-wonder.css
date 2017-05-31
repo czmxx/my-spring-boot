@@ -1,13 +1,6 @@
-/*
- * Start Bootstrap - One Page Wonder (http://startbootstrap.com/)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
- */
-
 body {
-    margin-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    margin-top: 50px;
 }
-
 .header-image {
     display: block;
     width: 100%;
