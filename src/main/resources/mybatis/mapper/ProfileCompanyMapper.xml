@@ -29,4 +29,21 @@
     id, name, city, street, country, state, postal_code, vip, stays, communications, 
     number, other_communications, email_address, fax_number, business_phone, mobile_phone
   </sql>
+
+  <!--<resultMap id="response" type="com.czm.domain.ProfileResponse">-->
+    <!--<result column="name" jdbcType="VARCHAR" property="name"/>-->
+    <!--<result column="email_address" jdbcType="VARCHAR" property="emailAddress"/>-->
+    <!--<result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone"/>-->
+  <!--</resultMap>-->
+
+
+  <!--<select id="selectLimit" resultMap="response">-->
+    <!--SELECT-->
+    <!--`name`,-->
+    <!--mobile_phone,-->
+    <!--email_address-->
+    <!--FROM-->
+    <!--profile_company-->
+    <!--LIMIT #{num},4999-->
+  <!--</select>-->
 </mapper>

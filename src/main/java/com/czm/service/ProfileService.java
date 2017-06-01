@@ -12,4 +12,7 @@ public interface ProfileService {
 
 
     void AnalyticalProfileCompany();
+
+
+    void dowonExcel(int num);
 }
