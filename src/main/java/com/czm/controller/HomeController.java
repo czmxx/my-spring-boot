@@ -2,9 +2,11 @@ package com.czm.controller;
 
 import com.czm.entity.Login;
 import com.czm.service.CityService;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -28,12 +30,18 @@ public class HomeController {
         return this.cityService.getLoginById(id);
     }
 
+    @PostMapping("Login/{name}/{password}")
+    public boolean getLoginByName(@PathVariable String name,String password) {
+
+        return this.cityService.getLoginByName(name,password);
+    }
+
     @PostMapping("/addLogin")
     public void addLogin() {
         Login login = new Login();
         login.setName("张三");
         login.setAge((byte) 20);
-        login.setPassworod(System.currentTimeMillis() + "");
+        login.setPassword(System.currentTimeMillis() + "");
         this.cityService.addLogin(login);
     }
 

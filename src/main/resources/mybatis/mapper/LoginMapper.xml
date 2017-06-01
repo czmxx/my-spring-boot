@@ -7,13 +7,13 @@
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="passworod" jdbcType="VARCHAR" property="passworod" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="age" jdbcType="TINYINT" property="age" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, name, passworod, age
+    id, name, password, age
   </sql>
 </mapper>

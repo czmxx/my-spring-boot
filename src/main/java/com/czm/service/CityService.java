@@ -15,5 +15,7 @@ public interface CityService {
 
     Login getLoginById(Long id);
 
+    boolean getLoginByName(String name,String password);
+
     void deleteLoginById(Long id);
 }

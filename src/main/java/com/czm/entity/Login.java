@@ -9,7 +9,7 @@ public class Login {
 
     private String name;
 
-    private String passworod;
+    private String password;
 
     private Byte age;
 
@@ -42,17 +42,17 @@ public class Login {
     }
 
     /**
-     * @return passworod
+     * @return password
      */
-    public String getPassworod() {
-        return passworod;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * @param passworod
+     * @param password
      */
-    public void setPassworod(String passworod) {
-        this.passworod = passworod;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**

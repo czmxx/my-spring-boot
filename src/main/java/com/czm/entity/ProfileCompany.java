@@ -4,38 +4,20 @@ import javax.persistence.*;
 
 @Table(name = "profile_company")
 public class ProfileCompany {
-    /**
-     * 客史Id
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * 姓名
-     */
     private String name;
 
-    /**
-     * 城市
-     */
     private String city;
 
-    /**
-     * 街道
-     */
     private String street;
 
-    /**
-     * 国家
-     */
     private String country;
 
     private String state;
 
-    /**
-     * 邮编
-     */
     @Column(name = "postal_code")
     private String postalCode;
 
@@ -43,9 +25,6 @@ public class ProfileCompany {
 
     private String stays;
 
-    /**
-     * 联系方式
-     */
     private String communications;
 
     private String number;
@@ -66,90 +45,70 @@ public class ProfileCompany {
     private String mobilePhone;
 
     /**
-     * 获取客史Id
-     *
-     * @return id - 客史Id
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * 设置客史Id
-     *
-     * @param id 客史Id
+     * @param id
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * 获取姓名
-     *
-     * @return name - 姓名
+     * @return name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 设置姓名
-     *
-     * @param name 姓名
+     * @param name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * 获取城市
-     *
-     * @return city - 城市
+     * @return city
      */
     public String getCity() {
         return city;
     }
 
     /**
-     * 设置城市
-     *
-     * @param city 城市
+     * @param city
      */
     public void setCity(String city) {
         this.city = city;
     }
 
     /**
-     * 获取街道
-     *
-     * @return street - 街道
+     * @return street
      */
     public String getStreet() {
         return street;
     }
 
     /**
-     * 设置街道
-     *
-     * @param street 街道
+     * @param street
      */
     public void setStreet(String street) {
         this.street = street;
     }
 
     /**
-     * 获取国家
-     *
-     * @return country - 国家
+     * @return country
      */
     public String getCountry() {
         return country;
     }
 
     /**
-     * 设置国家
-     *
-     * @param country 国家
+     * @param country
      */
     public void setCountry(String country) {
         this.country = country;
@@ -170,18 +129,14 @@ public class ProfileCompany {
     }
 
     /**
-     * 获取邮编
-     *
-     * @return postal_code - 邮编
+     * @return postal_code
      */
     public String getPostalCode() {
         return postalCode;
     }
 
     /**
-     * 设置邮编
-     *
-     * @param postalCode 邮编
+     * @param postalCode
      */
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
@@ -216,18 +171,14 @@ public class ProfileCompany {
     }
 
     /**
-     * 获取联系方式
-     *
-     * @return communications - 联系方式
+     * @return communications
      */
     public String getCommunications() {
         return communications;
     }
 
     /**
-     * 设置联系方式
-     *
-     * @param communications 联系方式
+     * @param communications
      */
     public void setCommunications(String communications) {
         this.communications = communications;
