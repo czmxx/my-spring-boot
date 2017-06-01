@@ -29,7 +29,7 @@ body {
     display: block;
     width: 100%;
     text-align: center;
-    background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496758755&di=6fd61bdfc1944d751283430c88c0f9c2&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.jj20.com%2Fup%2Fallimg%2F1011%2F05241G14R6%2F1F524114R6-13.jpg') no-repeat center center scroll;
+    background: url('/static/image/home.jpg') no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
