@@ -40,9 +40,6 @@ public class HomeController {
     @PostMapping("/addLogin")
     public void addLogin() {
         Login login = new Login();
-        login.setName("张三");
-        login.setAge((byte) 20);
-        login.setPassword(System.currentTimeMillis() + "");
         this.cityService.addLogin(login);
     }
     @GetMapping("getPage")

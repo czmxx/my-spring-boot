@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <classPathEntry
-            location="D:\JOB\MavenRepository\repository\mysql\mysql-connector-java\5.1.40\mysql-connector-java-5.1.40.jar"/>
+            location="E:\JOB\repo\mysql\mysql-connector-java\5.1.40\mysql-connector-java-5.1.40.jar"/>
     <!--MyBatis3Simple  不生成 Example   defaultModelType="flat" -->
     <context id="mysql" targetRuntime="MyBatis3">
         <!--可以选择很多的插件-->
@@ -20,9 +20,9 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/test"
+                        connectionURL="jdbc:mysql://120.25.106.62:3307/czm"
                         userId="root"
-                        password="root">
+                        password="123456">
         </jdbcConnection>
 
         <javaTypeResolver>

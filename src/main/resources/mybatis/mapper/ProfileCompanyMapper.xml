@@ -30,14 +30,14 @@
     number, other_communications, email_address, fax_number, business_phone, mobile_phone
   </sql>
 
-  <!--<resultMap id="response" type="com.czm.domain.ProfileResponse">-->
-    <!--<result column="name" jdbcType="VARCHAR" property="name"/>-->
-    <!--<result column="email_address" jdbcType="VARCHAR" property="emailAddress"/>-->
-    <!--<result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone"/>-->
-  <!--</resultMap>-->
+  <!--&amp;lt;resultMap id="response" type="com.czm.domain.ProfileResponse"&amp;gt;-->
+    <!--&amp;lt;result column="name" jdbcType="VARCHAR" property="name"/&amp;gt;-->
+    <!--&amp;lt;result column="email_address" jdbcType="VARCHAR" property="emailAddress"/&amp;gt;-->
+    <!--&amp;lt;result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone"/&amp;gt;-->
+  <!--&amp;lt;/resultMap&amp;gt;-->
 
 
-  <!--<select id="selectLimit" resultMap="response">-->
+  <!--&amp;lt;select id="selectLimit" resultMap="response"&amp;gt;-->
     <!--SELECT-->
     <!--`name`,-->
     <!--mobile_phone,-->
@@ -45,5 +45,5 @@
     <!--FROM-->
     <!--profile_company-->
     <!--LIMIT #{num},4999-->
-  <!--</select>-->
+  <!--&amp;lt;/select&amp;gt;-->
 </mapper>
