@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface ProfileCompanyMapperExt {
 
-
     List<ProfileResponse> selectLimit(@Param("num") int num);
 
 }

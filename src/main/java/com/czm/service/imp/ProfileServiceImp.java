@@ -1,9 +1,14 @@
 package com.czm.service.imp;
 
 import com.czm.core.util.TransactionalServer;
+import com.czm.domain.PageResponse;
+import com.czm.domain.ProfileResponse;
 import com.czm.entity.ProfileCompany;
 import com.czm.mapper.ProfileCompanyMapper;
+import com.czm.mapper.ProfileCompanyMapperExt;
 import com.czm.service.ProfileService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -29,6 +34,9 @@ public class ProfileServiceImp implements ProfileService {
 
     @Autowired
     private ProfileCompanyMapper profileCompanyMapper;
+
+    @Autowired
+    private ProfileCompanyMapperExt profileCompanyMapperExt;
 
     @Override
     public void profileCompany(InputStream inputStream) {
@@ -250,6 +258,28 @@ public class ProfileServiceImp implements ProfileService {
 //        File sss = new File(excelPath);
 //        System.out.println(sss.getAbsolutePath());
 
+    }
+
+    @Override
+    public PageResponse getPage(int num, int size) {
+
+
+        List<ProfileResponse> profileResponses = profileCompanyMapperExt.selectLimit(1);
+
+        profileResponses.forEach(a->{
+
+            System.out.println(a.getName());
+
+        });
+
+
+//        Page<Object> objects = PageHelper.startPage(num, size);
+//        List<ProfileCompany> profileCompanies = this.profileCompanyMapper.selectAll();
+//
+//        System.out.println(profileCompanies.size()+"profileCompanies size ");
+//
+//        System.out.println("objects   total  "+objects.getTotal());
+        return null;
     }
 
     private CellStyle getStyle(Workbook workbook) {

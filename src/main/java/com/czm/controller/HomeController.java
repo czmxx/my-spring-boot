@@ -2,11 +2,9 @@ package com.czm.controller;
 
 import com.czm.entity.Login;
 import com.czm.service.CityService;
+import com.czm.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +16,9 @@ import java.util.List;
 public class HomeController {
     @Autowired
     private CityService cityService;
+
+    @Autowired
+    private ProfileService profileService;
 
     @PostMapping("/getAll")
     public List<Login> getLoginAll() {
@@ -43,6 +44,10 @@ public class HomeController {
         login.setAge((byte) 20);
         login.setPassword(System.currentTimeMillis() + "");
         this.cityService.addLogin(login);
+    }
+    @GetMapping("getPage")
+    public void testPage(){
+        this.profileService.getPage(1,10);
     }
 
 }
