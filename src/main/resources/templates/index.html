@@ -10,7 +10,43 @@
     <link href="./static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="./static/css/cm.css" rel="stylesheet">
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="./static/bootstrap-3.3.7-dist/js/jquery.min.1.12.4.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="./static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="./static/js/config.js"></script>
+    <script>
+        $(
+            function () {
+               $('.toright').on('click',function () {
+                    $('.login_model').css('display','block');
+               }) ;
+               $('.login_btn').on('click',function(){
+                   var name = $('#name').val();
+                   var psw = $('#psw').val();
+                   var data = {
+                       name:name,
+                       password:psw
+                   }
+
+                   $.ajax({
+                       url:url+"home/Login/",
+                       data:data,
+                       type:'post',
+                       success:function(result){
+                           if(result){
+                               alert('登录成功');
+                               window.location.href=url+"login"
+                           }else{
+                               alert('登录失败');
+                           }
+                           $('.login_model').css('display','none');
+                   }});
+
+               })
+            }
+        );
+    </script>
+
 </head>
 
 <body>
@@ -39,6 +75,8 @@
                 </li>
             </ul>
         </div>
+        <div class="toright">登录</div>
+
     </div>
 </nav>
 
@@ -85,12 +123,27 @@
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <p>Copyright &copy; Your Website 2017</p>
+                <p>copyright &copy; your website 2017</p>
             </div>
         </div>
     </footer>
 
 </div>
+<!--模态框-->
+<div class="login_model">
+    <div class="login_model_content">
+        <div>账号</div>
+        <div>
+            <input type="text" id="name" placeholder="请输入账号">
+        </div>
+        <div>密码</div>
+        <div>
+            <input type="text" id="psw" placeholder="请输入密码">
+        </div>
+        <input type="button" value="login" class="btn btn-default login_btn">
+    </div>
+</div>
+
 <script src="./static/js/jquery.min.1.12.4js"></script>
 <script src="./static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </body>
