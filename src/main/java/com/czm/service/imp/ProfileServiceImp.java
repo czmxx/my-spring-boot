@@ -170,16 +170,33 @@ public class ProfileServiceImp implements ProfileService {
     }
 
     @Override
-    public void dowonExcel(int num) {
-        String excelPath = "F://excel/member_import" + num + ".xlsx";
+    public int dowonExcel(int num) {
+        String excelPath = "F://excel/member_import" + num + ".xls";
+        Page<Object> objects = PageHelper.startPage(num, 4999);
         List<ProfileCompany> profileCompanies = profileCompanyMapper.selectAll();
+        System.out.println("一共有这么多数据 " + objects.getTotal());
         Workbook workbook = null;
         Sheet sheet = null;
+        Cell cell = null;
         workbook = new XSSFWorkbook();
         sheet = workbook.createSheet("会员信息");
-        for (int i = 0; i < profileCompanies.size(); i++) {
+        Row row0 = sheet.createRow(0);
+        sheet.autoSizeColumn(0);
+        cell = row0.createCell(0, CellType.STRING);
+        cell.setCellValue("姓名");
+        cell = row0.createCell(1, CellType.STRING);
+        cell.setCellValue("手机号");
+        cell = row0.createCell(2, CellType.STRING);
+        cell.setCellValue("电子邮件");
+        cell = row0.createCell(3, CellType.STRING);
+        cell.setCellValue("身份证号");
+        cell = row0.createCell(4, CellType.STRING);
+        cell.setCellValue("会员类型");
+        cell = row0.createCell(5, CellType.STRING);
+        cell.setCellValue("会员等级");
 
-            Row row0 = sheet.createRow(i);
+        for (int i = 0; i < profileCompanies.size(); i++) {
+            Row row = sheet.createRow(i + 1);
             ProfileCompany p = profileCompanies.get(i);
             sheet.autoSizeColumn(i);
             for (int c = 0; c < 6; c++) {
@@ -190,8 +207,7 @@ public class ProfileServiceImp implements ProfileService {
                 headerFont.setFontName("宋体");
                 style.setFont(headerFont);
                 style.setWrapText(true);
-                Cell cell = row0.createCell(c, CellType.STRING);
-                cell.setCellType(CellType.STRING);
+                cell = row.createCell(c, CellType.STRING);
                 switch (c) {
                     case 0:
                         cell.setCellValue(StringUtils.isEmpty(p.getName()) ? "" : p.getName());
@@ -215,10 +231,9 @@ public class ProfileServiceImp implements ProfileService {
 
             }
         }
-
         if (workbook == null) {
             System.out.println("为空");
-            return;
+            return 0;
         }
         //自动设置宽度
         for (int colNum = 1; colNum < profileCompanies.size(); colNum++) {
@@ -255,30 +270,17 @@ public class ProfileServiceImp implements ProfileService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        File sss = new File(excelPath);
-//        System.out.println(sss.getAbsolutePath());
-
+        return profileCompanies.size();
     }
 
     @Override
     public PageResponse getPage(int num, int size) {
 
-
         List<ProfileResponse> profileResponses = profileCompanyMapperExt.selectLimit(1);
-
-        profileResponses.forEach(a->{
-
+        profileResponses.forEach(a -> {
             System.out.println(a.getName());
-
         });
 
-
-//        Page<Object> objects = PageHelper.startPage(num, size);
-//        List<ProfileCompany> profileCompanies = this.profileCompanyMapper.selectAll();
-//
-//        System.out.println(profileCompanies.size()+"profileCompanies size ");
-//
-//        System.out.println("objects   total  "+objects.getTotal());
         return null;
     }
 

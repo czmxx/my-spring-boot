@@ -34,6 +34,11 @@ public class ResponseDomain implements Serializable {
         this.code = code;
     }
 
+    public ResponseDomain(Object object) {
+        this.object = object;
+    }
+
+
     public boolean isSuccess() {
         return this.code != null && this.code.equals(CodeEnum.Success.getCode());
     }

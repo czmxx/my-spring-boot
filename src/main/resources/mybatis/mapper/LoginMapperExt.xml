@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czm.mapper.LoginMapperExt">
+    <resultMap id="BaseResultMap" type="com.czm.entity.Login">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="password_hash" jdbcType="VARCHAR" property="passwordHash"/>
+        <result column="password_salt" jdbcType="VARCHAR" property="passwordSalt"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="hander_image" jdbcType="VARCHAR" property="handerImage"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="deleted_flag" jdbcType="BIGINT" property="deletedFlag"/>
+        <result column="created_by" jdbcType="BIGINT" property="createdBy"/>
+        <result column="created_on" jdbcType="TIMESTAMP" property="createdOn"/>
+        <result column="modified_by" jdbcType="BIGINT" property="modifiedBy"/>
+        <result column="modified_on" jdbcType="TIMESTAMP" property="modifiedOn"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, email, mobile, password_hash, password_salt, nick_name, hander_image, status,
+        deleted_flag, created_by, created_on, modified_by, modified_on
+    </sql>
+
+
+    <!--like CONCAT(CONCAT('%',#{memberName}),'%')-->
+    <select id="selectByKeyword" resultMap="BaseResultMap">
+        SELECT * from login
+        where (email  =#{keyword} or mobile =#{keyword} or nick_name =#{keyword})  and status = #{status}
+    </select>
+
+
+</mapper>
