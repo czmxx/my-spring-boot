@@ -6,18 +6,17 @@ package com.czm.domain;
  */
 public enum CodeEnum {
 
-    Success(200, "Success"),
+    Success("Success", 200),
 
-    Fail(400, "Fail");
+    Fail("Fail", 400);
 
     private Integer code;
     private String name;
 
-    CodeEnum(Integer code, String name) {
+    CodeEnum(String name, Integer code) {
         this.code = code;
         this.name = name;
     }
-
     public Integer getCode() {
         return code;
     }
@@ -34,12 +33,5 @@ public enum CodeEnum {
         this.name = name;
     }
 
-    //
-//    private static final Map<Integer, String> MAP = new HashMap<>();
-//
-//    static {
-//        for (CodeEnum codeEnum : CodeEnum.values())
-//            MAP.put(codeEnum.getCode(), codeEnum.getName());
-//    }
 
 }

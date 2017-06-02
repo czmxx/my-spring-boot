@@ -33,7 +33,8 @@ public class ProfileServiceImpTest {
     public void AnalyticalProfileCompany() throws Exception {
 
 //        this.profileService.AnalyticalProfileCompany();
-        this.profileService.dowonExcel(1);
+        for (int i = 1; i <= 20; i++)
+            this.profileService.dowonExcel(i);
     }
 
 

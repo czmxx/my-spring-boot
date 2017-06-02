@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * Created by Administrator on 2017/3/5.
  */
-@Controller
+@Controller("/page")
 public class PageController {
 
     @GetMapping("/login")
