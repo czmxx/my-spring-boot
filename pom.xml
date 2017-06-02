@@ -102,6 +102,11 @@
         <!-- 分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
             <version>${pagehelper}</version>
         </dependency>
@@ -142,10 +147,21 @@
             <version>3.2.0</version>
         </dependency>
         <!--excel-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.poi</groupId>-->
+            <!--<artifactId>poi</artifactId>-->
+            <!--<version>3.9</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>3.9</version>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.15</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot </groupId>
+            <artifactId> spring-boot-configuration-processor </artifactId>
+            <optional> true </optional>
         </dependency>
 
     </dependencies>
@@ -179,6 +195,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <!--<proc> none </proc>-->
                     <compilerArguments>
                         <bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar</bootclasspath>
                     </compilerArguments>

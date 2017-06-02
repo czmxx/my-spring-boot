@@ -48,12 +48,6 @@ public class CityServiceImp implements CityService {
 
     @Override
     public boolean getLoginByName(String name,String password){
-        LoginExample example = new LoginExample();
-        example.createCriteria().andNameEqualTo(name);
-        Optional<Login> first = loginMapper.selectByExample(example).stream().findFirst();
-        if(first.isPresent()){
-            return password.equals(first.get().getPassword());
-        }
         return false;
     }
 

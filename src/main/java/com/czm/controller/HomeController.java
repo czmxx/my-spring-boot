@@ -2,6 +2,7 @@ package com.czm.controller;
 
 import com.czm.entity.Login;
 import com.czm.service.CityService;
+import com.czm.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,9 @@ import java.util.List;
 public class HomeController {
     @Autowired
     private CityService cityService;
+
+    @Autowired
+    private ProfileService profileService;
 
     @PostMapping("/getAll")
     public List<Login> getLoginAll() {
@@ -36,10 +40,11 @@ public class HomeController {
     @PostMapping("/addLogin")
     public void addLogin() {
         Login login = new Login();
-        login.setName("张三");
-        login.setAge((byte) 20);
-        login.setPassword(System.currentTimeMillis() + "");
         this.cityService.addLogin(login);
+    }
+    @GetMapping("getPage")
+    public void testPage(){
+        this.profileService.getPage(1,10);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.czm.service;
 
+import com.czm.domain.PageResponse;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -12,4 +14,11 @@ public interface ProfileService {
 
 
     void AnalyticalProfileCompany();
+
+
+    void dowonExcel(int num);
+
+    PageResponse  getPage(int num,int size);
+
+
 }

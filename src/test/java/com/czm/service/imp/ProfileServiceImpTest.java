@@ -32,7 +32,8 @@ public class ProfileServiceImpTest {
     @Test
     public void AnalyticalProfileCompany() throws Exception {
 
-        this.profileService.AnalyticalProfileCompany();
+//        this.profileService.AnalyticalProfileCompany();
+        this.profileService.dowonExcel(1);
     }
 
 
