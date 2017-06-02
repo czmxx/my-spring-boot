@@ -7,8 +7,6 @@ import com.czm.entity.ProfileCompany;
 import com.czm.mapper.ProfileCompanyMapper;
 import com.czm.mapper.ProfileCompanyMapperExt;
 import com.czm.service.ProfileService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -16,15 +14,17 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * Created by chen zhan mei on 2017/4/25.
@@ -171,92 +171,92 @@ public class ProfileServiceImp implements ProfileService {
 
     @Override
     public void dowonExcel(int num) {
-        String excelPath = "F://excel/member_import" + num + ".xlsx";
-        List<ProfileCompany> profileCompanies = profileCompanyMapper.selectAll();
-        Workbook workbook = null;
-        Sheet sheet = null;
-        workbook = new XSSFWorkbook();
-        sheet = workbook.createSheet("会员信息");
-        for (int i = 0; i < profileCompanies.size(); i++) {
-
-            Row row0 = sheet.createRow(i);
-            ProfileCompany p = profileCompanies.get(i);
-            sheet.autoSizeColumn(i);
-            for (int c = 0; c < 6; c++) {
-                CellStyle style = workbook.createCellStyle();
-                Font headerFont = workbook.createFont(); // 字体
-                headerFont.setFontHeightInPoints((short) 14);
-                headerFont.setColor(HSSFColor.RED.index);
-                headerFont.setFontName("宋体");
-                style.setFont(headerFont);
-                style.setWrapText(true);
-                Cell cell = row0.createCell(c, CellType.STRING);
-                cell.setCellType(CellType.STRING);
-                switch (c) {
-                    case 0:
-                        cell.setCellValue(StringUtils.isEmpty(p.getName()) ? "" : p.getName());
-                        break;
-                    case 1:
-                        cell.setCellValue(StringUtils.isEmpty(p.getMobilePhone()) ? "" : p.getMobilePhone());
-                        break;
-                    case 2:
-                        cell.setCellValue(StringUtils.isEmpty(p.getEmailAddress()) ? "" : p.getEmailAddress());
-                        break;
-                    case 3:
-                        cell.setCellValue("");
-                        break;
-                    case 4:
-                        cell.setCellValue("个人会员");
-                        break;
-                    case 5:
-                        cell.setCellValue("星会员");
-                        break;
-                }
-
-            }
-        }
-
-        if (workbook == null) {
-            System.out.println("为空");
-            return;
-        }
-        //自动设置宽度
-        for (int colNum = 1; colNum < profileCompanies.size(); colNum++) {
-            int columnWidth = sheet.getColumnWidth(colNum) / 256;
-            for (int rowNum = 1; rowNum < sheet.getLastRowNum(); rowNum++) {
-                Row currentRow;
-                if (sheet.getRow(rowNum) == null) {
-                    currentRow = sheet.createRow(rowNum);
-                } else {
-                    currentRow = sheet.getRow(rowNum);
-                }
-                if (currentRow.getCell(colNum) != null) {
-                    Cell currentCell = currentRow.getCell(colNum);
-                    if (currentCell.getCellType() == CellType.STRING.getCode()) {
-                        int length = currentCell.getStringCellValue().getBytes().length;
-                        if (columnWidth < length) {
-                            columnWidth = length;
-                        }
-                    }
-                }
-            }
-            if (colNum == 0) {
-                sheet.setColumnWidth(colNum, ((columnWidth - 2) * 256) > (255 * 256) ? (255 * 256) : ((columnWidth - 2) * 256));
-            } else {
-                sheet.setColumnWidth(colNum, ((columnWidth + 4) * 256) > (255 * 256) ? (255 * 256) : ((columnWidth + 4) * 256));
-            }
-        }
-        File sss = new File(excelPath);
-        try {
-            FileOutputStream outputStream = new FileOutputStream(sss);
-            workbook.write(outputStream);
-            outputStream.flush();
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        String excelPath = "F://excel/member_import" + num + ".xlsx";
+//        List<ProfileCompany> profileCompanies = profileCompanyMapper.selectAll();
+//        Workbook workbook = null;
+//        Sheet sheet = null;
+//        workbook = new XSSFWorkbook();
+//        sheet = workbook.createSheet("会员信息");
+//        for (int i = 0; i < profileCompanies.size(); i++) {
+//
+//            Row row0 = sheet.createRow(i);
+//            ProfileCompany p = profileCompanies.get(i);
+//            sheet.autoSizeColumn(i);
+//            for (int c = 0; c < 6; c++) {
+//                CellStyle style = workbook.createCellStyle();
+//                Font headerFont = workbook.createFont(); // 字体
+//                headerFont.setFontHeightInPoints((short) 14);
+//                headerFont.setColor(HSSFColor.RED.index);
+//                headerFont.setFontName("宋体");
+//                style.setFont(headerFont);
+//                style.setWrapText(true);
+//                Cell cell = row0.createCell(c, CellType.STRING);
+//                cell.setCellType(CellType.STRING);
+//                switch (c) {
+//                    case 0:
+//                        cell.setCellValue(StringUtils.isEmpty(p.getName()) ? "" : p.getName());
+//                        break;
+//                    case 1:
+//                        cell.setCellValue(StringUtils.isEmpty(p.getMobilePhone()) ? "" : p.getMobilePhone());
+//                        break;
+//                    case 2:
+//                        cell.setCellValue(StringUtils.isEmpty(p.getEmailAddress()) ? "" : p.getEmailAddress());
+//                        break;
+//                    case 3:
+//                        cell.setCellValue("");
+//                        break;
+//                    case 4:
+//                        cell.setCellValue("个人会员");
+//                        break;
+//                    case 5:
+//                        cell.setCellValue("星会员");
+//                        break;
+//                }
+//
+//            }
+//        }
+//
+//        if (workbook == null) {
+//            System.out.println("为空");
+//            return;
+//        }
+//        //自动设置宽度
+//        for (int colNum = 1; colNum < profileCompanies.size(); colNum++) {
+//            int columnWidth = sheet.getColumnWidth(colNum) / 256;
+//            for (int rowNum = 1; rowNum < sheet.getLastRowNum(); rowNum++) {
+//                Row currentRow;
+//                if (sheet.getRow(rowNum) == null) {
+//                    currentRow = sheet.createRow(rowNum);
+//                } else {
+//                    currentRow = sheet.getRow(rowNum);
+//                }
+//                if (currentRow.getCell(colNum) != null) {
+//                    Cell currentCell = currentRow.getCell(colNum);
+//                    if (currentCell.getCellType() == CellType.STRING.getCode()) {
+//                        int length = currentCell.getStringCellValue().getBytes().length;
+//                        if (columnWidth < length) {
+//                            columnWidth = length;
+//                        }
+//                    }
+//                }
+//            }
+//            if (colNum == 0) {
+//                sheet.setColumnWidth(colNum, ((columnWidth - 2) * 256) > (255 * 256) ? (255 * 256) : ((columnWidth - 2) * 256));
+//            } else {
+//                sheet.setColumnWidth(colNum, ((columnWidth + 4) * 256) > (255 * 256) ? (255 * 256) : ((columnWidth + 4) * 256));
+//            }
+//        }
 //        File sss = new File(excelPath);
-//        System.out.println(sss.getAbsolutePath());
+//        try {
+//            FileOutputStream outputStream = new FileOutputStream(sss);
+//            workbook.write(outputStream);
+//            outputStream.flush();
+//            outputStream.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+////        File sss = new File(excelPath);
+////        System.out.println(sss.getAbsolutePath());
 
     }
 

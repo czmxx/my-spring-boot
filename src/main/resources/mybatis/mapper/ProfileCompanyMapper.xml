@@ -30,14 +30,14 @@
     number, other_communications, email_address, fax_number, business_phone, mobile_phone
   </sql>
 
-  <!--&amp;lt;resultMap id="response" type="com.czm.domain.ProfileResponse"&amp;gt;-->
-    <!--&amp;lt;result column="name" jdbcType="VARCHAR" property="name"/&amp;gt;-->
-    <!--&amp;lt;result column="email_address" jdbcType="VARCHAR" property="emailAddress"/&amp;gt;-->
-    <!--&amp;lt;result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone"/&amp;gt;-->
-  <!--&amp;lt;/resultMap&amp;gt;-->
+  <!--&amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;resultMap id="response" type="com.czm.domain.ProfileResponse"&amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;-->
+    <!--&amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;result column="name" jdbcType="VARCHAR" property="name"/&amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;-->
+    <!--&amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;result column="email_address" jdbcType="VARCHAR" property="emailAddress"/&amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;-->
+    <!--&amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone"/&amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;-->
+  <!--&amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;/resultMap&amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;-->
 
 
-  <!--&amp;lt;select id="selectLimit" resultMap="response"&amp;gt;-->
+  <!--&amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;select id="selectLimit" resultMap="response"&amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;-->
     <!--SELECT-->
     <!--`name`,-->
     <!--mobile_phone,-->
@@ -45,5 +45,5 @@
     <!--FROM-->
     <!--profile_company-->
     <!--LIMIT #{num},4999-->
-  <!--&amp;lt;/select&amp;gt;-->
+  <!--&amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;/select&amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;-->
 </mapper>
