@@ -44,7 +44,7 @@ public class Swagger2Config {
                 .groupName("test group")
                 .apiInfo(apiInfo())
                 .select()
-                .paths(petstorePaths())
+//                .paths(petstorePaths())
                 .build()
                 .ignoredParameterTypes(ApiIgnore.class)
                 .enableUrlTemplating(true);
@@ -53,7 +53,7 @@ public class Swagger2Config {
     /*用于控制哪些接口对外暴露这个就是以为 get头的 */
     private Predicate<String> petstorePaths() {
         return or(
-                regex("/home.*"),
+                regex("/*"),
                 regex("/api/user.*"),
                 regex("/api/store.*")
         );

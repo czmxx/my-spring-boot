@@ -1,6 +1,7 @@
 package com.czm.service.imp;
 
 import com.czm.core.exceptions.MyException;
+import com.czm.core.util.PwdUtil;
 import com.czm.core.util.TransactionalServer;
 import com.czm.domain.BaseService;
 import com.czm.domain.ResponseDomain;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +26,8 @@ public class LoginServiceImp extends BaseService implements LoginService {
 
     @Autowired
     private LoginMapperExt loginMapperExt;
+    @Autowired
+    private LoginMapper loginMapper;
 
     @Override
     public ResponseDomain login(String keyword, String password, HttpServletRequest request) {
@@ -31,12 +35,10 @@ public class LoginServiceImp extends BaseService implements LoginService {
         if (StringUtils.isEmpty(keyword) || StringUtils.isEmpty(password))
             throw new MyException("参数异常!");
 
-        List<Login> logins = this.loginMapperExt.selectByKeyword(keyword, 0);
-        if (logins.size() == 0)
-            throw new MyException("没有改用户");
-
-        Login login = logins.get(0);
-        if (!password.equals(login.getPasswordHash())) {
+        Login login = checkLogin(keyword, 0);
+        if (null == login)
+            return fail("用户不存在!请注册!");
+        if (!PwdUtil.verifyPassword(password, login.getPasswordHash(), login.getPasswordSalt())) {
             throw new MyException("密码错误!");
         }
         HttpSession session = request.getSession();
@@ -44,6 +46,46 @@ public class LoginServiceImp extends BaseService implements LoginService {
         session.setAttribute("nickName", login.getNickName());
         session.setAttribute("handerImage", login.getHanderImage());
         return success();
+    }
+
+    @Override
+    public ResponseDomain register(String mobile, String email, String nickName, String headImageUrl, String password) {
+
+        if (StringUtils.isEmpty(mobile) || StringUtils.isEmpty(email))
+            return fail("手机号或者邮件不能为空!");
+
+        if (StringUtils.isEmpty(password))
+            return fail("密码不能为空!");
+
+        if (checkLogin(mobile, 0) != null || checkLogin(email, 0) != null)
+            return fail("该账户已存在!");
+
+        Login login = new Login();
+        login.setEmail(StringUtils.isEmpty(mobile) ? null : mobile);
+        login.setMobile(StringUtils.isEmpty(email) ? null : email);
+        login.setHanderImage(headImageUrl);
+        login.setNickName(nickName);
+        String salt = PwdUtil.generatePasswordSalt();
+        login.setPasswordSalt(salt);
+        login.setPasswordHash(PwdUtil.getPasswordHash(password, salt));
+        login.setCreatedBy(1L);
+        login.setCreatedOn(new Date());
+        return validResult(this.loginMapper.insert(login) > 0);
+    }
+
+
+    /**
+     * 用于校验用户是否存在
+     *
+     * @param keyword
+     * @param status
+     * @return
+     */
+    private Login checkLogin(String keyword, int status) {
+
+        List<Login> logins = this.loginMapperExt.selectByKeyword(keyword, status);
+        return logins.size() > 0 ? logins.get(0) : null;
+
     }
 
 }
