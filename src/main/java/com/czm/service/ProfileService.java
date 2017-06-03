@@ -16,9 +16,9 @@ public interface ProfileService {
     void AnalyticalProfileCompany();
 
 
-    int dowonExcel(int num);
+    void dowonExcel(int num);
 
-    PageResponse  getPage(int num,int size);
+    PageResponse getPage(int num, int size);
 
 
 }

@@ -21,7 +21,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         /**
          * 用于重定向swagger-ui.html
          */
-        registry.addResourceHandler("swagger-ui.html")
+        registry.addResourceHandler("/swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");

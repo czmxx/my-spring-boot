@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -38,26 +40,13 @@ public class Swagger2Config {
     }
 
     @Bean
-    public Docket categoryApi() {
+    public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                //.host("127.0.0.1:8081/a")//改变请求地址
-                .groupName("test group")
                 .apiInfo(apiInfo())
                 .select()
-                .paths(petstorePaths())
-                .build()
-                .ignoredParameterTypes(ApiIgnore.class)
-                .enableUrlTemplating(true);
-    }
-
-    /*用于控制哪些接口对外暴露这个就是以为 get头的 */
-    private Predicate<String> petstorePaths() {
-        return or(
-                regex("/home.*"),
-                regex("/table.*"),
-                regex("/api/user.*"),
-                regex("/api/store.*")
-        );
+                .apis(RequestHandlerSelectors.basePackage("com.czm.controller"))
+                .paths(PathSelectors.any())
+                .build();
     }
 
 }
