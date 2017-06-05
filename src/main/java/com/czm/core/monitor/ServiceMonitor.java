@@ -47,7 +47,7 @@ public class ServiceMonitor {
 //        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
 //        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
 //        HttpServletRequest request = sra.getRequest();
-        throw new ServerRuntimeException(e.toString());
+//        throw new ServerRuntimeException(e.toString());
 
     }
 

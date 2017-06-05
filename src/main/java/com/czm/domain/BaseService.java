@@ -1,6 +1,6 @@
 package com.czm.domain;
 
-import com.czm.core.exceptions.MyException;
+import com.czm.core.exceptions.MsgException;
 
 /**
  * Created by CHENZHANMEI on 2017/6/2.
@@ -34,13 +34,13 @@ public class BaseService {
 
     protected ResponseDomain validResult(ResponseDomain result) {
         if (!result.getCode().equals(CodeEnum.Success.getCode()))
-            throw new MyException(result.getMessage());
+            throw new MsgException(result.getMessage());
         return result;
     }
 
     protected ResponseDomain validResult(Boolean value) {
         if (!value)
-            throw new MyException(CodeEnum.Fail.getName());
+            throw new MsgException(CodeEnum.Fail.getName());
 
         return new ResponseDomain(CodeEnum.Success.getCode());
     }

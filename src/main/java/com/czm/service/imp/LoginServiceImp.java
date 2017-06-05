@@ -1,6 +1,6 @@
 package com.czm.service.imp;
 
-import com.czm.core.exceptions.MyException;
+import com.czm.core.exceptions.MsgException;
 import com.czm.core.util.PwdUtil;
 import com.czm.core.util.TransactionalServer;
 import com.czm.domain.BaseService;
@@ -33,13 +33,13 @@ public class LoginServiceImp extends BaseService implements LoginService {
     public ResponseDomain login(String keyword, String password, HttpServletRequest request) {
 
         if (StringUtils.isEmpty(keyword) || StringUtils.isEmpty(password))
-            throw new MyException("参数异常!");
+            throw new MsgException("参数异常!");
 
         Login login = checkLogin(keyword, 0);
         if (null == login)
             return fail("用户不存在!请注册!");
         if (!PwdUtil.verifyPassword(password, login.getPasswordHash(), login.getPasswordSalt())) {
-            throw new MyException("密码错误!");
+            throw new MsgException("密码错误!");
         }
         HttpSession session = request.getSession();
         session.setAttribute("login", "success");
