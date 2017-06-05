@@ -51,7 +51,7 @@ public class LoginServiceImp extends BaseService implements LoginService {
     @Override
     public ResponseDomain register(String mobile, String email, String nickName, String headImageUrl, String password) {
 
-        if (StringUtils.isEmpty(mobile) || StringUtils.isEmpty(email))
+        if (StringUtils.isEmpty(mobile) && StringUtils.isEmpty(email))
             return fail("手机号或者邮件不能为空!");
 
         if (StringUtils.isEmpty(password))
@@ -68,6 +68,8 @@ public class LoginServiceImp extends BaseService implements LoginService {
         String salt = PwdUtil.generatePasswordSalt();
         login.setPasswordSalt(salt);
         login.setPasswordHash(PwdUtil.getPasswordHash(password, salt));
+        login.setStatus((byte)0);
+        login.setDeletedFlag(0L);
         login.setCreatedBy(1L);
         login.setCreatedOn(new Date());
         return validResult(this.loginMapper.insert(login) > 0);

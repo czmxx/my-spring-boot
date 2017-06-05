@@ -39,22 +39,6 @@ spring:
       max-wait: 1
       min-idle: 0
 
-
-#mybatis:
-#    type-aliases-package: tk.mybatis.springboot.model
-#    mapper-locations: classpath:mapper/*.xml
-#
-#mapper:
-#    mappers:
-#        - tk.mybatis.springboot.util.MyMapper
-#    not-empty: false
-#    identity: MYSQL
-#
-#pagehelper:
-#    helperDialect: mysql
-#    reasonable: true
-#    supportMethodsArguments: true
-#    params: count=countSql
 ##mybaits 自動掃描路徑 ，
 mybatis:
   #实体类路径
