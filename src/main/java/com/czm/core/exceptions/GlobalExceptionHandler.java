@@ -28,12 +28,12 @@ public class GlobalExceptionHandler implements ResponseMessage {
      * @param response
      * @param e
      */
-    @ExceptionHandler(value = MyException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void myExceptionHandler(HttpServletResponse response, Exception e) {
+    @ExceptionHandler(value = MsgException.class)
+    public void msgExceptionHandler(HttpServletResponse response, Exception e) {
 
         sendResponseMessage(response, e.getMessage());
     }
+
 
     /***
      *系统异常,返回到页面!
