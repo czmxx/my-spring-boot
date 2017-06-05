@@ -1,6 +1,7 @@
 package com.czm.core.config;
 
 import com.google.common.base.Predicate;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.annotations.ApiIgnore;
@@ -20,6 +21,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
  */
 @Configuration
 @EnableSwagger2
+@ConfigurationProperties
 public class Swagger2Config {
 
     /***
@@ -48,6 +50,7 @@ public class Swagger2Config {
                 .build()
                 .ignoredParameterTypes(ApiIgnore.class)
                 .enableUrlTemplating(true);
+
     }
 
     /*用于控制哪些接口对外暴露这个就是以为 get头的 */

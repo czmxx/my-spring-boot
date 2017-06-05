@@ -2,6 +2,7 @@ package com.czm.controller;
 
 import com.czm.entity.Infotable;
 import com.czm.service.InfotableService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,9 @@ import java.util.List;
 public class InfotableController {
     @Autowired
     private InfotableService infotableService;
+
+    @ApiOperation(value="测试接口", notes="接口描述")
+
 
     @PostMapping("/getAll")
     public List<Infotable> getInfotableAll() {
