@@ -44,7 +44,11 @@ public class ServiceMonitor {
         log.error("[" + signature.toShortString() + "]" + Arrays.toString(args) + "[" + e.toString() + "]");
         log.info("*********************************************************************************");
         // Throw a new server internal error exception
+//        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+//        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
+//        HttpServletRequest request = sra.getRequest();
         throw new ServerRuntimeException(e.toString());
+
     }
 
 }

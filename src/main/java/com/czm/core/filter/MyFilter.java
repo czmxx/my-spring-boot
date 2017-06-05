@@ -11,6 +11,7 @@ import java.io.IOException;
 /**
  * 过滤器
  * Created by Administrator on 2017/2/18.
+ * 过滤器属于Servlet范畴的API
  */
 @WebFilter(filterName = "myFilter", urlPatterns = "/*")
 public class MyFilter implements Filter {
