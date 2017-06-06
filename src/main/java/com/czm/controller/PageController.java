@@ -6,22 +6,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Created by Administrator on 2017/3/5.
- *
  */
 @Controller("/page")
 public class PageController {
 
     @GetMapping("/login")
     public String getLoginPage() {
-        System.out.println("login");
         return "/web/login";
     }
 
+    @GetMapping("/register")
+    public String getRegister() {
+        return "/web/register";
+    }
 
     @GetMapping("/index")
-    public String index(Model model) {
-        model.addAttribute("hello", "afafafaf");
-        model.addAttribute("aaaa", "login.html");
+    public String index() {
         return "index";
     }
 

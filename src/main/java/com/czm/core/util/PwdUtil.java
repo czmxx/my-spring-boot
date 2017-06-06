@@ -1,6 +1,11 @@
 package com.czm.core.util;
 
-import javax.crypto.*;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
@@ -12,7 +17,8 @@ import java.util.Base64;
 import java.util.Random;
 
 /**
- * Created by CAOZHIHUI on 2016/1/19.
+ * Created by CAOZHIHUI on
+ * 2016/1/19.
  */
 public class PwdUtil {
 
@@ -47,15 +53,7 @@ public class PwdUtil {
             cipher.init(Cipher.ENCRYPT_MODE, key);
             byte[] result = cipher.doFinal(byteContent);
             return Base64.getEncoder().encodeToString(result);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
             e.printStackTrace();
         }
         return null;
@@ -83,8 +81,7 @@ public class PwdUtil {
     }
 
     public static boolean verifyPassword(String password, String passwordHash, String passwordSalt) {
-        if (password == null || passwordHash == null || passwordSalt == null) return false;
-        return passwordHash.equalsIgnoreCase(getPasswordHash(password, passwordSalt));
+        return !(password == null || passwordHash == null || passwordSalt == null) && passwordHash.equalsIgnoreCase(getPasswordHash(password, passwordSalt));
     }
 
     public static String getPasswordHash(String password, String passwordSalt) {
@@ -102,8 +99,8 @@ public class PwdUtil {
         digest.update(bytes);
         byte messageDigest[] = digest.digest();
         StringBuilder hexString = new StringBuilder();
-        for (int i = 0; i < messageDigest.length; i++) {
-            String shaHex = Integer.toHexString(messageDigest[i] & 0xFF);
+        for (byte aMessageDigest : messageDigest) {
+            String shaHex = Integer.toHexString(aMessageDigest & 0xFF);
             if (shaHex.length() < 2) {
                 hexString.append("0");
             }

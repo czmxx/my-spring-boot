@@ -1,5 +1,6 @@
 package com.czm.core.monitor;
 
+import com.czm.core.exceptions.MsgException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.rmi.ServerRuntimeException;
 import java.util.Arrays;
 
 /**
@@ -46,7 +48,7 @@ public class ServiceMonitor {
 //        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
 //        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
 //        HttpServletRequest request = sra.getRequest();
-//        throw new ServerRuntimeException(e.toString());
+        throw new MsgException(e.toString());
 
     }
 

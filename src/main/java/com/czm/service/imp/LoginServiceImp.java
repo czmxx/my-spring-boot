@@ -2,7 +2,8 @@ package com.czm.service.imp;
 
 import com.czm.core.exceptions.MsgException;
 import com.czm.core.util.PwdUtil;
-import com.czm.core.util.TransactionalServer;
+import com.czm.core.util.TransactionalService;
+import com.czm.core.util.ValidUtil;
 import com.czm.domain.BaseService;
 import com.czm.domain.ResponseDomain;
 import com.czm.entity.Login;
@@ -21,7 +22,7 @@ import java.util.List;
  * Created by CHENZHANMEI on 2017/6/2.
  * 该接口用于用户相关的接口
  */
-@TransactionalServer
+@TransactionalService
 public class LoginServiceImp extends BaseService implements LoginService {
 
     @Autowired
@@ -33,13 +34,13 @@ public class LoginServiceImp extends BaseService implements LoginService {
     public ResponseDomain login(String keyword, String password, HttpServletRequest request) {
 
         if (StringUtils.isEmpty(keyword) || StringUtils.isEmpty(password))
-            throw new MsgException("参数异常!");
+            return fail("参数异常!");
 
         Login login = checkLogin(keyword, 0);
         if (null == login)
             return fail("用户不存在!请注册!");
         if (!PwdUtil.verifyPassword(password, login.getPasswordHash(), login.getPasswordSalt())) {
-            throw new MsgException("密码错误!");
+            return fail("密码错误!");
         }
         HttpSession session = request.getSession();
         session.setAttribute("login", "success");
@@ -60,6 +61,9 @@ public class LoginServiceImp extends BaseService implements LoginService {
         if (checkLogin(mobile, 0) != null || checkLogin(email, 0) != null)
             return fail("该账户已存在!");
 
+        if (!StringUtils.isEmpty(mobile) && !ValidUtil.isMobile(mobile))
+            return fail("手机号错误!");
+
         Login login = new Login();
         login.setEmail(StringUtils.isEmpty(mobile) ? null : mobile);
         login.setMobile(StringUtils.isEmpty(email) ? null : email);
@@ -68,7 +72,7 @@ public class LoginServiceImp extends BaseService implements LoginService {
         String salt = PwdUtil.generatePasswordSalt();
         login.setPasswordSalt(salt);
         login.setPasswordHash(PwdUtil.getPasswordHash(password, salt));
-        login.setStatus((byte)0);
+        login.setStatus((byte) 0);
         login.setDeletedFlag(0L);
         login.setCreatedBy(1L);
         login.setCreatedOn(new Date());
@@ -87,7 +91,6 @@ public class LoginServiceImp extends BaseService implements LoginService {
 
         List<Login> logins = this.loginMapperExt.selectByKeyword(keyword, status);
         return logins.size() > 0 ? logins.get(0) : null;
-
     }
 
 }

@@ -1,5 +1,6 @@
 package com.czm.core.config;
 
+import com.czm.core.interceptor.BaseInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
 
@@ -16,7 +17,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         /**
          * 用于重定向swagger-ui.html
@@ -36,5 +36,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("/web/login");
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new BaseInterceptor()).addPathPatterns("/**");
     }
 }

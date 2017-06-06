@@ -1,6 +1,6 @@
 package com.czm.service.imp;
 
-import com.czm.core.util.TransactionalServer;
+import com.czm.core.util.TransactionalService;
 import com.czm.entity.Login;
 import com.czm.entity.LoginExample;
 import com.czm.mapper.LoginMapper;
@@ -9,12 +9,11 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by chen zhan mei  on 2017/2/15.
  */
-@TransactionalServer
+@TransactionalService
 //@Service
 public class CityServiceImp implements CityService {
 

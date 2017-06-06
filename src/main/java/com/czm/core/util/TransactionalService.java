@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Service
 @Transactional
-public @interface TransactionalServer {
+public @interface TransactionalService {
 
 }
 

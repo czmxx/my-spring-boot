@@ -1,6 +1,6 @@
 package com.czm.service.imp;
 
-import com.czm.core.util.TransactionalServer;
+import com.czm.core.util.TransactionalService;
 import com.czm.entity.Infotable;
 import com.czm.mapper.InfotableMapper;
 import com.czm.service.InfotableService;
@@ -15,7 +15,7 @@ import java.util.List;
  * @create 2017-06-02
  */
 
-@TransactionalServer
+@TransactionalService
 public class InfotableServiceImp implements InfotableService {
 
     @Autowired

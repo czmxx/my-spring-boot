@@ -1,6 +1,6 @@
 package com.czm.service.imp;
 
-import com.czm.core.util.TransactionalServer;
+import com.czm.core.util.TransactionalService;
 import com.czm.domain.PageResponse;
 import com.czm.domain.ProfileResponse;
 import com.czm.entity.ProfileCompany;
@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by chen zhan mei on 2017/4/25.
  */
-@TransactionalServer
+@TransactionalService
 public class ProfileServiceImp implements ProfileService {
 
     @Autowired

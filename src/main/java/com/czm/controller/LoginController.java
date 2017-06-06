@@ -20,21 +20,20 @@ public class LoginController {
     private LoginService loginService;
 
 
-    @PostMapping("/login")
+    @PostMapping("/getLogin")
     public ResponseDomain login(@RequestParam String keyword,
                                 @RequestParam String password, HttpServletRequest request) {
 
         return loginService.login(keyword, password, request);
     }
 
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    @RequestMapping(value = "/getRegister", method = RequestMethod.POST)
     public ResponseDomain register(@RequestParam(required = false) String mobile,
-                                   @RequestParam(required = false) String email,
                                    @RequestParam String nickName,
                                    @RequestParam(required = false) String headImageUrl,
                                    @RequestParam String password) {
 
-        return loginService.register(mobile, email, nickName, headImageUrl, password);
+        return loginService.register(mobile, null, nickName, headImageUrl, password);
     }
 
 
