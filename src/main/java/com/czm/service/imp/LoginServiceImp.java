@@ -1,6 +1,5 @@
 package com.czm.service.imp;
 
-import com.czm.core.exceptions.MsgException;
 import com.czm.core.util.PwdUtil;
 import com.czm.core.util.TransactionalService;
 import com.czm.core.util.ValidUtil;

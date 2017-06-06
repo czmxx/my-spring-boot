@@ -15,16 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/login")
 public class LoginController {
 
-
     @Autowired
     private LoginService loginService;
 
 
-    @PostMapping("/getLogin")
-    public ResponseDomain login(@RequestParam String keyword,
+    @RequestMapping(value = "/getLogin", method = RequestMethod.POST)
+    public ResponseDomain login(@RequestParam String mobile,
                                 @RequestParam String password, HttpServletRequest request) {
 
-        return loginService.login(keyword, password, request);
+        return loginService.login(mobile, password, request);
     }
 
     @RequestMapping(value = "/getRegister", method = RequestMethod.POST)

@@ -1,23 +1,26 @@
+$(function () {
+});
 //登录接口
 function login() {
-    const keyword ='17607451239';// $("#email").val();
-    const password ='122'// $("#password").val();
+    const email = $("#email").val();
+    const password = $("#password_login").val();
     $.ajax({
-        url: url + "login/getLogin",
-        data: {keyword: keyword, password: password},
         type: 'post',
-        success: function (result) {
-            if (result.code === 200) {
-                // window.location.href = 'index.html';
+        url: url + "login/getLogin",
+        data: {mobile: email, password: password},
+        success: function (data) {
+            console.log(data);
+            if (data.code === 200) {
+                window.location.href = 'index.html';
             } else {
-                $("#info1").html(result.message);
+                $("#info1").html(data.message);
                 $("#myModal1").modal("show");
             }
         }
     });
 }
 
-$("#login").on("click", function () {
+$("#denglu").on("click", function () {
     login();
 });
 $("#register").on('click', function () {
@@ -50,7 +53,7 @@ function register() {
         return;
     }
     $.ajax({
-        url: url + "login/register",
+        url: url + "login/getRegister",
         data: {mobile: mobil, nickName: userName, password: password2},
         type: 'post',
         success: function (result) {
